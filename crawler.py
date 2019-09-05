@@ -8,3 +8,16 @@
 # TODO: Retirar o nome do autor
 # TODO: Salvar cada frase em um txt
 # Obs: Para retirar o nome do autor, a ideia eh dar um split no primeiro ".", porem algumas frases tem mais de um "."!
+
+import urllib.request
+# import urllib.parse
+
+content = urllib.request.urlopen("http://wisdomquotes.com/inspirational-quotes/").read()
+content = str(content)
+find = '<blockquote><p>'
+posicao = int(content.index(find) + len(find))
+findPoint = '<a class="clicktotweet"'
+parada = int(content.index(findPoint) + len(findPoint))
+texto = content[posicao:parada-23]
+
+print(texto)
