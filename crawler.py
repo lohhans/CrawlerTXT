@@ -1,3 +1,10 @@
+# <>================================<>
+# ||\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/||
+# ||        Armstrong Lohãns        ||
+# ||              2019              ||
+# ||\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/||
+# <>================================<>
+
 # LOVE: http://wisdomquotes.com/love-quotes/
 # FUNNY: http://wisdomquotes.com/funny-quotes/
 # PEACE: http://wisdomquotes.com/peace-quotes/
