@@ -5,15 +5,12 @@
 # ||\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/||
 # <>================================<>
 
-# LOVE: http://wisdomquotes.com/love-quotes/
-# FUNNY: http://wisdomquotes.com/funny-quotes/
-# PEACE: http://wisdomquotes.com/peace-quotes/
-
 from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 
+
 def percorrer(texto):
-    final = int(texto.find('\n'))+1
+    final = int(texto.find('\n')) + 1
     reverso = texto[::-1]
     inicioPonto = int(reverso.find('.'))
     inicioInterrogacao = int(reverso.find('?'))
@@ -29,10 +26,11 @@ def percorrer(texto):
             inicio = inicioPonto
 
     if inicioExclamacao > 0:
-        if inicio == 0 or (inicioExclamacao > 0 and inicio > inicioExclamacao):
+        if inicio == 0 or (0 < inicioExclamacao < inicio):
             inicio = inicioExclamacao
 
-    return(inicio, final)
+    return inicio, final
+
 
 def crawler(site, nome):
     req = Request(site, headers={'User-Agent': 'Mozilla/5.0'})
@@ -47,7 +45,7 @@ def crawler(site, nome):
         texto = p.text.strip('Click to tweet') + '\n'
 
         inicio, final = percorrer(texto)
-        parada = final-inicio
+        parada = final - inicio
         textoSemAutor = texto[0:parada]
 
         arquivo = open(nome + '.txt', 'r')
@@ -56,6 +54,8 @@ def crawler(site, nome):
         arquivo = open(nome + '.txt', 'w')
         arquivo.writelines(conteudo)
 
+
+# MAIN
 
 site = input('Cole o link do "wisdomquotes.com": ')
 nome = input('Nome do .txt de saída (só o nome): ')
