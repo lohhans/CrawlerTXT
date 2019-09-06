@@ -1,23 +1,29 @@
-# Exemplo a ser buscado:
-#
-# <blockquote><p>Every next level of your life will demand a different you. <a
-# class="clicktotweet" title="Click to tweet!" href="https://twitter.com/intent/tweet?text=Every next level of your
-# life will demand a different you.+http://bit.ly/mostinspirationalquotes" target="_blank" rel="nofollow noopener
-# noreferrer">Click to tweet</a></p></blockquote>
+# LOVE: http://wisdomquotes.com/love-quotes/
+# FUNNY: http://wisdomquotes.com/funny-quotes/
+# PEACE: http://wisdomquotes.com/peace-quotes/
 
-# TODO: Retirar o nome do autor
-# TODO: Salvar cada frase em um txt
-# TODO: Receber site do teclado
-
-# Obs: Para retirar o nome do autor, a ideia eh dar um split no primeiro ".", porem algumas frases tem mais de um "."!
-
-import urllib.request
+from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 
 
-site = urllib.request.urlopen('http://wisdomquotes.com/inspirational-quotes/').read()
-soup = BeautifulSoup(site, "html.parser")
+def crawler(site, nome):
+    req = Request(site, headers={'User-Agent': 'Mozilla/5.0'})
+    webpage = urlopen(req).read()
 
-texto = soup.find_all('blockquote')
-for p in soup.find_all('blockquote'):
-   print(p.text+'\n')
+    soup = BeautifulSoup(webpage, "html.parser")
+
+    arquivo = open(nome + '.txt', 'w')
+    arquivo.close()
+
+    for p in soup.find_all('blockquote'):
+        arquivo = open(nome + '.txt', 'r')
+        conteudo = arquivo.readlines()
+        conteudo.append(p.text.strip('Click to tweet') + '\n')
+        arquivo = open(nome + '.txt', 'w')
+        arquivo.writelines(conteudo)
+
+
+site = input('Cole o link do "wisdomquotes.com": ')
+nome = input('Nome do .txt de saída (só o nome): ')
+
+crawler(site, nome)
