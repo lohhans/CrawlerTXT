@@ -1,4 +1,4 @@
 # Wisdomquotes Crawler
-Crawler simples para o site [wisdomquotes.com](wisdomquotes.com)
+Crawler simples para o site [wisdomquotes.com](http://wisdomquotes.com/)
 
-Para executar: ``python3 crawler.py``
+Para executar: ``python3 crawler.py``M
