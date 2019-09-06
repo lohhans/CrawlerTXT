@@ -15,7 +15,23 @@ from bs4 import BeautifulSoup
 def percorrer(texto):
     final = int(texto.find('\n'))+1
     reverso = texto[::-1]
-    inicio = int(reverso.find('.')) #TODO: Como fazer encontrar "?", "!" e "’"
+    inicioPonto = int(reverso.find('.'))
+    inicioInterrogacao = int(reverso.find('?'))
+    inicioExclamacao = int(reverso.find('!'))
+    inicio = 0
+    if inicioPonto > 0:
+        if inicioInterrogacao > 0:
+            if inicioPonto < inicioInterrogacao:
+                inicio = inicioPonto
+            else:
+                inicio = inicioInterrogacao
+        else:
+            inicio = inicioPonto
+
+    if inicioExclamacao > 0:
+        if inicio == 0 or (inicioExclamacao > 0 and inicio > inicioExclamacao):
+            inicio = inicioExclamacao
+
     return(inicio, final)
 
 def crawler(site, nome):
